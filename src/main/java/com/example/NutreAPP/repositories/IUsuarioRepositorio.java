@@ -1,11 +1,31 @@
 package com.example.NutreAPP.repositories;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository 
+import com.example.NutreAPP.models.Usuario;
+import com.example.NutreAPP.models.helpers.Departamento;
+import com.example.NutreAPP.models.helpers.Rol;
 
-public interface IUsuarioRepositorio extends JpaRepository{
+@Repository 
+public interface IUsuarioRepositorio extends JpaRepository <Usuario,UUID>{
+
+
+
+    //Consultas prefabricadas (BUSCAR)
+
+    //1. Buscar un usuario asociado a un departamento y a un rol en especifico
+    List<Usuario>findByDepartamentoAndRol(String departamento, String rol);
+
+    Optional<Usuario> findByCorreo (String correo);
+
+
+    List<Usuario> findByRolOrderByNombreAsc(String rol);
+
+    boolean existsByCorreo(String coreo);
 
 }
